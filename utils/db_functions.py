@@ -9,7 +9,6 @@ from aiogram.utils.exceptions import (
 )
 
 from loader import bot, udb
-from services.error_service import notify_exception_to_admin
 
 
 async def send_message_to_users(message: types.Message):
@@ -58,7 +57,7 @@ async def send_message_to_users(message: types.Message):
 
                 except Exception as err:
                     failed_count += 1
-                    await notify_exception_to_admin(err=err)
+
 
             except (
                     BotBlocked,
@@ -75,10 +74,6 @@ async def send_message_to_users(message: types.Message):
             except Exception as err:
 
                 failed_count += 1
-
-                await notify_exception_to_admin(
-                    err=err
-                )
 
             # Har 2000 userdan keyin qisqa dam
             if index % 2000 == 0:
@@ -165,10 +160,6 @@ async def send_media_group_to_users(
 
                     failed_count += 1
 
-                    await notify_exception_to_admin(
-                        err=err
-                    )
-
             except (
                     BotBlocked,
                     UserDeactivated,
@@ -184,10 +175,6 @@ async def send_media_group_to_users(
             except Exception as err:
 
                 failed_count += 1
-
-                await notify_exception_to_admin(
-                    err=err
-                )
 
             # Har 1000 userdan keyin pause
             if index % 1000 == 0:
