@@ -5,6 +5,7 @@ from aiogram import executor
 from data.config import WEB_APP_URL, WEBHOOK_PATH, WEBAPP_HOST, WEBAPP_PORT
 from loader import dp, bot, db
 from utils.notify_admins import on_startup_notify
+from utils.set_bot_commands import set_default_commands
 
 WEBHOOK_URL = f"{WEB_APP_URL}{WEBHOOK_PATH}"
 
@@ -12,6 +13,7 @@ WEBHOOK_URL = f"{WEB_APP_URL}{WEBHOOK_PATH}"
 async def on_startup(dispatcher):
     try:
         await on_startup_notify(dispatcher)
+	await set_default_commands(dispatcher)
         print("✅ Notify done")
     except Exception as e:
         print(f"❌ Notify error: {e}")
