@@ -13,7 +13,7 @@ WEBHOOK_URL = f"{WEB_APP_URL}{WEBHOOK_PATH}"
 async def on_startup(dispatcher):
     try:
         await on_startup_notify(dispatcher)
-	await set_default_commands(dispatcher)
+        await set_default_commands(dispatcher)
         print("✅ Notify done")
     except Exception as e:
         print(f"❌ Notify error: {e}")
