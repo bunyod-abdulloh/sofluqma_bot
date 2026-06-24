@@ -16,7 +16,7 @@ async def handle_start(message: types.Message, state: FSMContext):
     await udb.add_user(telegram_id)
 
     token = generate_tg_token(message.from_user.id)
-    url = f"{WEB_APP_URL}?tg_token={token}"
+    url = f"{WEB_APP_URL}/products/bot/?tg_token={token}"
 
     await message.answer(
         text="Xush kelibsiz!",
