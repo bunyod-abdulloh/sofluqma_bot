@@ -3,9 +3,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import CommandStart
 
 from data.config import APP_URL
-from keyboards.default.user import user_main_kb
 from loader import dp, udb
-from utils.tg_token import generate_tg_token
 
 
 @dp.message_handler(CommandStart(), state="*")
@@ -15,10 +13,19 @@ async def handle_start(message: types.Message, state: FSMContext):
     telegram_id = int(message.from_user.id)
     await udb.add_user(telegram_id)
 
-    token = generate_tg_token(message.from_user.id)
-    url = f"{APP_URL}/products/bot/?tg_token={token}"
+    kb = types.InlineKeyboardMarkup()
+    url = f"{APP_URL}/products/bot/"
+    kb.add(
+        types.InlineKeyboardButton(
+            text="🛍 Mahsulotlar",
+            web_app=types.WebAppInfo(
+                url=url
+            )
+        )
+    )
+
 
     await message.answer(
         text="Xush kelibsiz!",
-        reply_markup=user_main_kb(url=url)
+        reply_markup=kb
     )
